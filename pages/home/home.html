@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Star Wars Characters</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content 
+  padding
+  *ngIf="(people$ | async) as people">
+  <ion-list>
+    <ion-item *ngFor="let person of people.list">
+      <h1>{{person.name}}</h1>
+      <h3>{{person.birth_year}}</h3>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll 
+    *ngIf="people.next"
+    appInfiniteScroll
+    [loading]="people.loading"
+    (ionInfinite)="nextPage()">
+    <ion-infinite-scroll-content>
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
